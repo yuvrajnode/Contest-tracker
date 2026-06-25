@@ -1,74 +1,133 @@
 import type { Contest } from "@/app/types/contest"
 
-// Mock data for when the database is not available
+const d = (offsetDays: number, offsetHours = 0) =>
+  new Date(Date.now() + offsetDays * 86_400_000 + offsetHours * 3_600_000).toISOString()
+
 export const mockContests: Contest[] = [
+  // ── Upcoming ──────────────────────────────────────────────
   {
-    id: "cf-1234",
-    name: "Codeforces Round #789 (Div. 2)",
+    id: "cf-2050",
+    name: "Codeforces Round 1000 (Div. 1 + Div. 2, rated, based on problems by tourists)",
     platform: "codeforces",
-    url: "https://codeforces.com/contests/1234",
-    startTime: new Date(Date.now() + 2 * 24 * 60 * 60 * 1000).toISOString(), // 2 days from now
-    endTime: new Date(Date.now() + 2 * 24 * 60 * 60 * 1000 + 2 * 60 * 60 * 1000).toISOString(), // 2 hours duration
-    duration: 7200, // 2 hours in seconds
-  },
-  {
-    id: "cf-1235",
-    name: "Codeforces Round #790 (Div. 1)",
-    platform: "codeforces",
-    url: "https://codeforces.com/contests/1235",
-    startTime: new Date(Date.now() + 5 * 24 * 60 * 60 * 1000).toISOString(), // 5 days from now
-    endTime: new Date(Date.now() + 5 * 24 * 60 * 60 * 1000 + 2.5 * 60 * 60 * 1000).toISOString(), // 2.5 hours duration
-    duration: 9000, // 2.5 hours in seconds
-  },
-  {
-    id: "cc-123",
-    name: "CodeChef Starters 42",
-    platform: "codechef",
-    url: "https://www.codechef.com/START42",
-    startTime: new Date(Date.now() + 3 * 24 * 60 * 60 * 1000).toISOString(), // 3 days from now
-    endTime: new Date(Date.now() + 3 * 24 * 60 * 60 * 1000 + 3 * 60 * 60 * 1000).toISOString(), // 3 hours duration
-    duration: 10800, // 3 hours in seconds
-  },
-  {
-    id: "lc-weekly-300",
-    name: "LeetCode Weekly Contest 300",
-    platform: "leetcode",
-    url: "https://leetcode.com/contest/weekly-contest-300",
-    startTime: new Date(Date.now() + 6 * 24 * 60 * 60 * 1000).toISOString(), // 6 days from now
-    endTime: new Date(Date.now() + 6 * 24 * 60 * 60 * 1000 + 1.5 * 60 * 60 * 1000).toISOString(), // 1.5 hours duration
-    duration: 5400, // 1.5 hours in seconds
-  },
-  {
-    id: "cf-1230",
-    name: "Codeforces Round #785 (Div. 2)",
-    platform: "codeforces",
-    url: "https://codeforces.com/contests/1230",
-    startTime: new Date(Date.now() - 10 * 24 * 60 * 60 * 1000).toISOString(), // 10 days ago
-    endTime: new Date(Date.now() - 10 * 24 * 60 * 60 * 1000 + 2 * 60 * 60 * 1000).toISOString(),
+    url: "https://codeforces.com/contests/2050",
+    startTime: d(1, 3),
+    endTime: d(1, 5),
     duration: 7200,
-    solutionLink: "https://www.youtube.com/watch?v=example1",
   },
   {
-    id: "cc-120",
-    name: "CodeChef Starters 40",
+    id: "cf-2051",
+    name: "Codeforces Round 1001 (Div. 2)",
+    platform: "codeforces",
+    url: "https://codeforces.com/contests/2051",
+    startTime: d(3),
+    endTime: d(3, 2),
+    duration: 7200,
+  },
+  {
+    id: "cf-2052",
+    name: "Educational Codeforces Round 175 (rated for Div. 2)",
+    platform: "codeforces",
+    url: "https://codeforces.com/contests/2052",
+    startTime: d(7, 17),
+    endTime: d(7, 19),
+    duration: 7200,
+  },
+  {
+    id: "cc-START160",
+    name: "CodeChef Starters 160 (Div. 1, 2, 3 & 4)",
     platform: "codechef",
-    url: "https://www.codechef.com/START40",
-    startTime: new Date(Date.now() - 15 * 24 * 60 * 60 * 1000).toISOString(), // 15 days ago
-    endTime: new Date(Date.now() - 15 * 24 * 60 * 60 * 1000 + 3 * 60 * 60 * 1000).toISOString(),
+    url: "https://www.codechef.com/START160",
+    startTime: d(2, 14),
+    endTime: d(2, 17),
     duration: 10800,
-    solutionLink: "https://www.youtube.com/watch?v=example2",
   },
   {
-    id: "lc-weekly-298",
-    name: "LeetCode Weekly Contest 298",
+    id: "cc-COOK159",
+    name: "CodeChef Cook-Off 159 (Div. 1 & 2)",
+    platform: "codechef",
+    url: "https://www.codechef.com/COOK159",
+    startTime: d(9, 19),
+    endTime: d(9, 21.5),
+    duration: 9000,
+  },
+  {
+    id: "lc-weekly-455",
+    name: "LeetCode Weekly Contest 455",
     platform: "leetcode",
-    url: "https://leetcode.com/contest/weekly-contest-298",
-    startTime: new Date(Date.now() - 20 * 24 * 60 * 60 * 1000).toISOString(), // 20 days ago
-    endTime: new Date(Date.now() - 20 * 24 * 60 * 60 * 1000 + 1.5 * 60 * 60 * 1000).toISOString(),
+    url: "https://leetcode.com/contest/weekly-contest-455",
+    startTime: d(5, 10.5),
+    endTime: d(5, 12),
     duration: 5400,
+  },
+  {
+    id: "lc-biweekly-145",
+    name: "LeetCode Biweekly Contest 145",
+    platform: "leetcode",
+    url: "https://leetcode.com/contest/biweekly-contest-145",
+    startTime: d(12, 14),
+    endTime: d(12, 15.5),
+    duration: 5400,
+  },
+  {
+    id: "cf-2053",
+    name: "Codeforces Round 1002 (Div. 3)",
+    platform: "codeforces",
+    url: "https://codeforces.com/contests/2053",
+    startTime: d(14, 9),
+    endTime: d(14, 11.5),
+    duration: 9000,
+  },
+
+  // ── Past ──────────────────────────────────────────────────
+  {
+    id: "cf-2045",
+    name: "Codeforces Round 995 (Div. 2)",
+    platform: "codeforces",
+    url: "https://codeforces.com/contests/2045",
+    startTime: d(-7, 17),
+    endTime: d(-7, 19),
+    duration: 7200,
+    solutionLink: "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+  },
+  {
+    id: "cf-2044",
+    name: "Educational Codeforces Round 173",
+    platform: "codeforces",
+    url: "https://codeforces.com/contests/2044",
+    startTime: d(-14, 17),
+    endTime: d(-14, 19),
+    duration: 7200,
+    solutionLink: "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+  },
+  {
+    id: "cc-START155",
+    name: "CodeChef Starters 155 (Div. 1, 2, 3 & 4)",
+    platform: "codechef",
+    url: "https://www.codechef.com/START155",
+    startTime: d(-5, 14),
+    endTime: d(-5, 17),
+    duration: 10800,
+    solutionLink: "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+  },
+  {
+    id: "lc-weekly-452",
+    name: "LeetCode Weekly Contest 452",
+    platform: "leetcode",
+    url: "https://leetcode.com/contest/weekly-contest-452",
+    startTime: d(-14, 10.5),
+    endTime: d(-14, 12),
+    duration: 5400,
+  },
+  {
+    id: "lc-biweekly-142",
+    name: "LeetCode Biweekly Contest 142",
+    platform: "leetcode",
+    url: "https://leetcode.com/contest/biweekly-contest-142",
+    startTime: d(-21, 14),
+    endTime: d(-21, 15.5),
+    duration: 5400,
+    solutionLink: "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
   },
 ]
 
-// Mock bookmarks
-export const mockBookmarks = ["cf-1234", "lc-weekly-300"]
-
+export const mockBookmarks: string[] = ["cf-2050", "lc-weekly-455"]
