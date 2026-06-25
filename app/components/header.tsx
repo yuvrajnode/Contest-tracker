@@ -1,8 +1,8 @@
 "use client"
 
-import { useState, useEffect } from "react"
+import { useState } from "react"
 import Link from "next/link"
-import { Moon, Sun, Menu, X, Trophy, Github } from "lucide-react"
+import { Moon, Sun, Menu, X, Github } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { cn } from "@/lib/utils"
 
@@ -13,112 +13,81 @@ interface HeaderProps {
 
 export default function Header({ toggleTheme, isDarkMode }: HeaderProps) {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
-  const [scrolled, setScrolled] = useState(false)
-
-  useEffect(() => {
-    const handleScroll = () => setScrolled(window.scrollY > 8)
-    window.addEventListener("scroll", handleScroll, { passive: true })
-    return () => window.removeEventListener("scroll", handleScroll)
-  }, [])
 
   return (
-    <header
-      className={cn(
-        "sticky top-0 z-50 transition-all duration-200",
-        scrolled
-          ? "bg-background/90 backdrop-blur-md border-b shadow-sm"
-          : "bg-transparent border-b border-transparent",
-      )}
-    >
+    <header className="sticky top-0 z-50 border-b bg-background/95 backdrop-blur-sm">
       <div className="container mx-auto px-4">
-        <div className="flex h-16 items-center justify-between">
-          {/* Logo */}
-          <Link href="/" className="flex items-center gap-2">
-            <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-primary">
-              <Trophy className="h-4 w-4 text-primary-foreground" />
-            </div>
-            <span className="font-bold text-lg bg-gradient-to-r from-primary to-purple-500 bg-clip-text text-transparent">
-              ContestHub
-            </span>
+        <div className="h-14 flex items-center justify-between">
+          <Link href="/" className="font-mono font-bold text-[15px] tracking-tight select-none">
+            contest<span className="text-primary">hub</span>
           </Link>
 
           {/* Desktop nav */}
-          <nav className="hidden md:flex items-center gap-1">
-            <Link
-              href="/"
-              className="px-3 py-2 text-sm font-medium text-muted-foreground hover:text-foreground rounded-lg hover:bg-muted transition-colors"
-            >
-              Dashboard
+          <nav className="hidden md:flex items-center gap-5">
+            <Link href="/" className="text-sm text-muted-foreground hover:text-foreground transition-colors">
+              Home
             </Link>
-            <Link
-              href="/admin"
-              className="px-3 py-2 text-sm font-medium text-muted-foreground hover:text-foreground rounded-lg hover:bg-muted transition-colors"
-            >
+            <Link href="/admin" className="text-sm text-muted-foreground hover:text-foreground transition-colors">
               Admin
             </Link>
             <a
               href="https://github.com/yuvrajnode"
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center gap-1.5 px-3 py-2 text-sm font-medium text-muted-foreground hover:text-foreground rounded-lg hover:bg-muted transition-colors"
+              className="text-sm text-muted-foreground hover:text-foreground transition-colors flex items-center gap-1.5"
             >
-              <Github className="h-4 w-4" />
+              <Github className="h-3.5 w-3.5" />
               GitHub
             </a>
-            <div className="w-px h-5 bg-border mx-1" />
             <Button
               variant="ghost"
               size="icon"
               onClick={toggleTheme}
-              aria-label={isDarkMode ? "Switch to light mode" : "Switch to dark mode"}
-              className="h-9 w-9 rounded-lg"
+              className="h-8 w-8 text-muted-foreground hover:text-foreground"
+              aria-label={isDarkMode ? "Light mode" : "Dark mode"}
             >
-              {isDarkMode ? <Sun className="h-4 w-4" /> : <Moon className="h-4 w-4" />}
+              {isDarkMode ? <Sun className="h-3.5 w-3.5" /> : <Moon className="h-3.5 w-3.5" />}
             </Button>
           </nav>
 
-          {/* Mobile controls */}
+          {/* Mobile */}
           <div className="md:hidden flex items-center gap-1">
-            <Button variant="ghost" size="icon" onClick={toggleTheme} className="h-9 w-9">
-              {isDarkMode ? <Sun className="h-4 w-4" /> : <Moon className="h-4 w-4" />}
+            <Button variant="ghost" size="icon" onClick={toggleTheme} className="h-8 w-8">
+              {isDarkMode ? <Sun className="h-3.5 w-3.5" /> : <Moon className="h-3.5 w-3.5" />}
             </Button>
             <Button
               variant="ghost"
               size="icon"
               onClick={() => setIsMenuOpen(!isMenuOpen)}
-              className="h-9 w-9"
-              aria-label="Toggle menu"
+              className="h-8 w-8"
             >
-              {isMenuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+              {isMenuOpen ? <X className="h-4 w-4" /> : <Menu className="h-4 w-4" />}
             </Button>
           </div>
         </div>
 
-        {/* Mobile menu */}
         {isMenuOpen && (
-          <nav className="md:hidden border-t py-3 space-y-1 pb-4">
-            <Link
-              href="/"
-              className="flex items-center px-3 py-2 text-sm font-medium text-muted-foreground hover:text-foreground rounded-lg hover:bg-muted"
-              onClick={() => setIsMenuOpen(false)}
-            >
-              Dashboard
-            </Link>
-            <Link
-              href="/admin"
-              className="flex items-center px-3 py-2 text-sm font-medium text-muted-foreground hover:text-foreground rounded-lg hover:bg-muted"
-              onClick={() => setIsMenuOpen(false)}
-            >
-              Admin
-            </Link>
+          <nav className="md:hidden border-t py-3 pb-4 space-y-0.5">
+            {[
+              { label: "Home", href: "/" },
+              { label: "Admin", href: "/admin" },
+            ].map(({ label, href }) => (
+              <Link
+                key={href}
+                href={href}
+                className="flex items-center px-2 py-2 text-sm text-muted-foreground hover:text-foreground rounded-sm hover:bg-accent transition-colors"
+                onClick={() => setIsMenuOpen(false)}
+              >
+                {label}
+              </Link>
+            ))}
             <a
               href="https://github.com/yuvrajnode"
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center gap-2 px-3 py-2 text-sm font-medium text-muted-foreground hover:text-foreground rounded-lg hover:bg-muted"
-              onClick={() => setIsMenuOpen(false)}
+              className="flex items-center gap-2 px-2 py-2 text-sm text-muted-foreground hover:text-foreground rounded-sm hover:bg-accent transition-colors"
             >
-              <Github className="h-4 w-4" />
+              <Github className="h-3.5 w-3.5" />
               GitHub
             </a>
           </nav>
