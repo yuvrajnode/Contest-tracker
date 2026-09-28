@@ -1,6 +1,10 @@
-# 🏆 Contest Tracker Application
+# 🏆 Contest Tracker
 
-This is a Next.js web application designed to help competitive programmers track contests from various platforms. It provides a centralized view of upcoming and past contests from Codeforces, CodeChef, and LeetCode, along with features for filtering, bookmarking, and accessing solution links.
+A Next.js app that helps competitive programmers track contests from Codeforces, CodeChef and LeetCode in one place, with live countdowns, platform filters, bookmarks and solution links.
+
+**Live demo →** [contest-tracker-ashen.vercel.app](https://contest-tracker-ashen.vercel.app)
+
+![Contest Tracker: upcoming Codeforces, CodeChef and LeetCode contests with live countdowns](docs/screenshot.png)
 
 ## ✨ Features
 
